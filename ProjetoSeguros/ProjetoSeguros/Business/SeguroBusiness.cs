@@ -13,9 +13,36 @@ namespace ProjetoSeguros.Business
             try
             {
                 string message = "";
-                if (string.IsNullOrWhiteSpace(numCliente)) { message = "O campo Cliente é obrigatório.<br>"; }
-                if (indTipo == 0) { message += "O campo Tipo é obrigatorio.<br>"; }
-                if (string.IsNullOrWhiteSpace(objetoSegurado)) { message += "O campo Objeto Segurado é obrigatório."; }
+                if (string.IsNullOrWhiteSpace(numCliente)) { message = "O campo Cliente é obrigatório.\n"; }
+                else
+                {
+                    if(numCliente.Length == 14)
+                    {
+                        if(!Utilitarios.ValidaCPF(numCliente))
+                            message += "O campo Cliente é inválido.\n";
+                    }
+                    else
+                    {
+                        if(!Utilitarios.ValidaCNPJ(numCliente))
+                            message += "O campo Cliente é inválido.\n";
+                    }
+                }
+                if (indTipo == 0) { message += "O campo Tipo é obrigatorio.\n"; }
+                if (string.IsNullOrWhiteSpace(objetoSegurado)) { message += "O campo Objeto Segurado é obrigatório.\n"; }
+                else
+                {
+                    if(indTipo == 3)
+                    {
+                        if (!Utilitarios.ValidaCPF(objetoSegurado))
+                            message += "O campo Objeto Segurado é obrigatório.";
+                    }
+                }
+                if (!string.IsNullOrWhiteSpace(message))
+                {
+                    retorno.Sucesso = false;
+                    retorno.Mensagem = message;
+                    return retorno;
+                }
 
                 if (idSeguro.HasValue && idSeguro > 0)
                 {
