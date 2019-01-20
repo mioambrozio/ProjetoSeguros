@@ -1,0 +1,42 @@
+﻿@model ProjetoSeguros.Models.BuscarSeguro
+@{
+    ViewBag.Title = "Lista de Seguros";
+}
+<h2>@ViewBag.Title</h2>
+<div id="model" data-model="@Helpers.JsonEncode(Model)"></div>
+<form id="form-pesquisar">
+    <div class="jumbotron">
+        <div class="row">
+            <div style="width: 100%; padding:15px">
+                <div style="margin-top:0;max-height:600px;">
+                    <div class="table-responsive table-overflow">
+                        <table class="table table-striped">
+                            <thead class="table-head" style="background-color: black;color: #9d9d9d;">
+                                <tr class="table-tr">
+                                    <th class="table-th" style="width: 7%">Número Seguro</th>
+                                    <th class="table-th" style="width: 10%">Cliente</th>
+                                    <th class="table-th" style="width: 7%">Tipo</th>
+                                    <th class="table-th" style="width: 25%">Segurado</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-body" id="tabela" data-bind="foreach: lista">
+                                <tr class="table-tr">
+                                    <td class="table-td" data-bind="text: id"></td>
+                                    <td class="table-td" data-bind="text: numCliente"></td>
+                                    <td class="table-td" data-bind="text:dscTipo"></td>
+                                    <td class="table-td" data-bind="text: objetoSegurado"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</form>
+
+@section scripts {
+    @Scripts.Render("~/bundles/Pesquisar")
+}

@@ -1,0 +1,74 @@
+﻿@model ProjetoSeguros.Models.Login
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Seguros</title>
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/login.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Seguros</a>
+            </div>
+        </div>
+    </div>
+    <div id="model" data-model="@Helpers.JsonEncode(Model)"></div>
+    <div id="LoginForm">
+        <div class="container">
+            <div class="login-form">
+                <div class="main-div">
+                    <div class="panel">
+                        <h2>Acesso so sistema</h2>
+                        <p>Favor informar usuário e senha</p>
+                    </div>
+                    <form id="Login">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="inputUsuario" placeholder="Usuário" data-bind="value:usuario">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Senha" data-bind="value:senha">
+                        </div>
+                        @*<div class="forgot">
+                                <a href="#" data-bind="click: resetarSenha">Resetar Senha?</a>
+                            </div>*@
+                        <button type="submit" class="btn btn-primary" data-bind="click:Entrar">Entrar</button>
+                    </form>
+                </div>
+                <p class="botto-text">Gerenciamento de Seguros</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/knockout-3.4.2.debug.js"></script>
+    <script src="~/Scripts/knockout-file-bindings.js"></script>
+    <script src="~/Scripts/knockout-jqAutocomplete.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.debug.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/knockout.validation.js"></script>
+    <script src="~/Scripts/knockoutsortable.js"></script>
+    <script src="~/Scripts/ko-components.js"></script>
+    <script src="~/Scripts/ko-convenience.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/Framework_Base.js"></script>
+    <script src="~/Scripts/login.js"></script>
+</body>
+</html>
