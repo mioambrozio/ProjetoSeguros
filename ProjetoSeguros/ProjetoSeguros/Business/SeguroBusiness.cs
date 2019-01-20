@@ -1,7 +1,6 @@
 ﻿using ProjetoSeguros.Interface;
 using ProjetoSeguros.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace ProjetoSeguros.Business

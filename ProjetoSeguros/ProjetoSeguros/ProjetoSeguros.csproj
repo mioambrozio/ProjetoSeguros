@@ -183,36 +183,36 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Scripts\autoNumeric.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\EncontrarVeiculo.js" />
-    <Content Include="Scripts\Excluir.js" />
+    <Content Include="Scripts\plugins\autoNumeric.js" />
+    <Content Include="Scripts\plugins\bootstrap.js" />
+    <Content Include="Scripts\plugins\bootstrap.min.js" />
+    <None Include="Scripts\plugins\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\seguro\EncontrarVeiculo.js" />
+    <Content Include="Scripts\seguro\Excluir.js" />
     <Content Include="Scripts\Framework_Base.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-3.4.2.debug.js" />
-    <Content Include="Scripts\knockout-3.4.2.js" />
-    <Content Include="Scripts\knockout-file-bindings.js" />
-    <Content Include="Scripts\knockout-jqAutocomplete.js" />
-    <Content Include="Scripts\knockout-jqAutocomplete.min.js" />
-    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
-    <Content Include="Scripts\knockout.mapping-latest.js" />
-    <Content Include="Scripts\knockout.validation.js" />
-    <Content Include="Scripts\knockout.validation.min.js" />
-    <Content Include="Scripts\knockoutsortable.js" />
-    <Content Include="Scripts\login.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\Pesquisar.js" />
-    <Content Include="Scripts\seguro.js" />
+    <Content Include="Scripts\plugins\jquery-3.3.1.js" />
+    <Content Include="Scripts\plugins\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\plugins\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\plugins\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\plugins\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\plugins\jquery.validate.js" />
+    <Content Include="Scripts\plugins\jquery.validate.min.js" />
+    <Content Include="Scripts\plugins\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\plugins\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\plugins\knockout-3.4.2.debug.js" />
+    <Content Include="Scripts\plugins\knockout-3.4.2.js" />
+    <Content Include="Scripts\plugins\knockout-file-bindings.js" />
+    <Content Include="Scripts\plugins\knockout-jqAutocomplete.js" />
+    <Content Include="Scripts\plugins\knockout-jqAutocomplete.min.js" />
+    <Content Include="Scripts\plugins\knockout.mapping-latest.debug.js" />
+    <Content Include="Scripts\plugins\knockout.mapping-latest.js" />
+    <Content Include="Scripts\plugins\knockout.validation.js" />
+    <Content Include="Scripts\plugins\knockout.validation.min.js" />
+    <Content Include="Scripts\plugins\knockoutsortable.js" />
+    <Content Include="Scripts\seguro\login.js" />
+    <Content Include="Scripts\plugins\modernizr-2.8.3.js" />
+    <Content Include="Scripts\seguro\Pesquisar.js" />
+    <Content Include="Scripts\seguro\seguro.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -227,7 +227,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\knockout.validation.min.js.map" />
+    <Content Include="Scripts\plugins\knockout.validation.min.js.map" />
     <Content Include="Views\Home\Pesquisar.cshtml" />
     <Content Include="Views\Home\Excluir.cshtml" />
     <Content Include="Views\Home\EncontrarVeiculo.cshtml" />
@@ -238,8 +238,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\plugins\jquery-3.3.1.min.map" />
+    <Content Include="Scripts\plugins\jquery-3.3.1.slim.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
