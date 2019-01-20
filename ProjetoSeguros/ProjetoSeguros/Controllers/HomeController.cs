@@ -1,8 +1,6 @@
 ﻿using ProjetoSeguros.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ProjetoSeguros.Controllers
@@ -12,16 +10,13 @@ namespace ProjetoSeguros.Controllers
         Business.SeguroBusiness bl = new Business.SeguroBusiness();
         public ActionResult Index()
         {
-            Login login;
-
-            login = (Login)System.Web.HttpContext.Current.Session["sessionLogin"];
-            
+            DadosLogado login = Utilitarios.RetornaDadosLogin();
             if (login == null)
                 return RedirectToAction("Login", "Login");
 
             return View();
         }
-
+        
         public ActionResult About()
         {
             return View(new Seguro(true));

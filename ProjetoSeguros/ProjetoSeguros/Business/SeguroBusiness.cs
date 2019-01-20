@@ -1,5 +1,6 @@
 ﻿using ProjetoSeguros.Interface;
 using ProjetoSeguros.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,112 +8,148 @@ namespace ProjetoSeguros.Business
 {
     public class SeguroBusiness : IBaseBusiness
     {
-        List<Seguro> lista;
-
-        public SeguroBusiness()
-        {
-            if (lista == null)
-            {
-                lista = new List<Seguro>();
-
-                lista.Add(new Seguro(false) { id = 1, dscTipo = "Automóvel", indTipo = 1, numCliente = "678", objetoSegurado = "ASD-1234" });
-                lista.Add(new Seguro(false) { id = 2, dscTipo = "Residencial", indTipo = 2, numCliente = "1234", objetoSegurado = "RUA PEDRO SENKO, 152, BOQUEIRRÃO - ARAUCÁRIA/PR" });
-                lista.Add(new Seguro(false) { id = 3, dscTipo = "Vida", indTipo = 3, numCliente = "36", objetoSegurado = "07876554300" });
-                lista.Add(new Seguro(false) { id = 4, dscTipo = "Automóvel", indTipo = 1, numCliente = "98", objetoSegurado = "AVG-9876" });
-                lista.Add(new Seguro(false) { id = 5, dscTipo = "Automóvel", indTipo = 1, numCliente = "80", objetoSegurado = "BHG-1234" });
-                lista.Add(new Seguro(false) { id = 6, dscTipo = "Automóvel", indTipo = 1, numCliente = "45", objetoSegurado = "AKY-0909" });
-                lista.Add(new Seguro(false) { id = 7, dscTipo = "Vida", indTipo = 2, numCliente = "87", objetoSegurado = "RUA MINAS GERAIS, 405, COSTEIRA - ARAUCÁRIA/PR" });
-            }
-        }
         public Retorno Salvar(string numCliente, int indTipo, string objetoSegurado, int? idSeguro = null)
         {
             Retorno retorno = new Retorno();
-            string message = "";
-            if (string.IsNullOrWhiteSpace(numCliente)) { message = "O campo Cliente é obrigatório.<br>"; }
-            if (indTipo == 0) { message += "O campo Tipo é obrigatorio.<br>"; }
-            if (string.IsNullOrWhiteSpace(objetoSegurado)) { message += "O campo Objeto Segurado é obrigatório."; }
-
-            if (idSeguro.HasValue)
+            try
             {
-                //alterar
-                retorno.Mensagem = "Alterado com sucesso!";
-            }
-            else
-            {
-                //salvar
-                retorno.Mensagem = "Salvo com sucesso!";
-            }
+                string message = "";
+                if (string.IsNullOrWhiteSpace(numCliente)) { message = "O campo Cliente é obrigatório.<br>"; }
+                if (indTipo == 0) { message += "O campo Tipo é obrigatorio.<br>"; }
+                if (string.IsNullOrWhiteSpace(objetoSegurado)) { message += "O campo Objeto Segurado é obrigatório."; }
 
+                if (idSeguro.HasValue)
+                {
+                    //alterar
+                    retorno.Mensagem = "Alterado com sucesso!";
+                }
+                else
+                {
+                    Utilitarios.RetornaDadosLogin().idCount++;
+
+                    Utilitarios.RetornaDadosLogin().listaSeguros.Add(new Seguro()
+                    {
+                        id = Utilitarios.RetornaDadosLogin().idCount,
+                        indTipo = indTipo,
+                        objetoSegurado = objetoSegurado,
+                        numCliente = numCliente,
+                        dscTipo = indTipo == 1 ? "Automóvel" : indTipo == 2 ? "Residencial" : indTipo == 3 ? "Vida" : ""
+                    });
+                    retorno.Mensagem = "Salvo com sucesso!";
+                }
+            }
+            catch (Exception ex)
+            {
+                retorno.Sucesso = false;
+                retorno.Mensagem = "Erro ao salvar. Erro:" + ex.Message;
+            }
             return retorno;
         }
 
         public Retorno Buscar(int numSeguro)
         {
-            if (numSeguro == 0)
+            try
             {
-                return new Retorno(false, "O campo Número do seguro é obrigatório.");
-            }
-            else
-            {
-                if (numSeguro == 1234)
-                    return new Retorno(true, new Seguro(true) { id = 1, indTipo = 2, numCliente = "1234", objetoSegurado = "08987688986" });
-
+                if (numSeguro == 0)
+                {
+                    return new Retorno(false, "O campo Número do seguro é obrigatório.");
+                }
                 else
-                    return new Retorno(false, "Seguro informado não encontrado.");
+                {
+                    Seguro s = Utilitarios.RetornaDadosLogin().listaSeguros.Where(x => x.id == numSeguro).SingleOrDefault();
+
+                    if (s != null)
+                        return new Retorno(true, s);
+                    else
+                        return new Retorno(false, "Seguro informado não encontrado.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Retorno(false, "Erro ao Buscar seguro. Erro: " + ex.Message);
             }
         }
 
         public Retorno BuscarParaExcluir(int numSeguro)
         {
-            if (numSeguro == 0)
-                return new Retorno(false, "Informe Número do Seguro para a exclusão.");
-            else
+            try
             {
-                if (lista.Where(x => x.id == numSeguro).ToList().Count == 0)
-                    return new Retorno(false, "Seguro não encontrado!");
+                if (numSeguro == 0)
+                    return new Retorno(false, "Informe Número do Seguro para a exclusão.");
                 else
-                    return new Retorno(true, "Deseja Realmente Excluir esse registro?");
+                {
+                    if (Utilitarios.RetornaDadosLogin().listaSeguros.Where(x => x.id == numSeguro).ToList().Count == 0)
+                        return new Retorno(false, "Seguro não encontrado!");
+                    else
+                        return new Retorno(true, "Deseja Realmente Excluir esse registro?");
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Retorno(true, "Erro ao buscar seguro. Erro: " + ex.Message);
             }
         }
 
         public Retorno Excluir(int numSeguro)
         {
-            lista.RemoveAll((x) => x.id == numSeguro);
+            try
+            {
+                Utilitarios.RetornaDadosLogin().listaSeguros.RemoveAll((x) => x.id == numSeguro);
+                return new Retorno(true, "Excluído com sucesso.");
+            }
+            catch (Exception ex)
+            {
 
-            return new Retorno(true, "Excluído com sucesso.");
+                return new Retorno(false, "Erro ao excluir seguro. Erro: " + ex.Message);
+            }
         }
 
         public Retorno Pesquisar()
         {
-            return new Retorno(true, lista);
+            try
+            {
+                return new Retorno(true, Utilitarios.RetornaDadosLogin().listaSeguros);
+            }
+            catch (Exception ex)
+            {
+                return new Retorno(true, "Erro ao buscar seguro. Erro: " + ex.Message);
+            }
         }
 
         public Retorno Pesquisar(string numPlaca)
         {
             Retorno retorno = new Retorno();
-            if (string.IsNullOrWhiteSpace(numPlaca))
-            {
-                retorno.Sucesso = false;
-                retorno.Mensagem = "Não encontrado seguro para este veículo.";
-            }
-            else
-            {
-                Seguro s = lista.Where(x => x.objetoSegurado == numPlaca && x.indTipo == 1).SingleOrDefault();
 
-                if (s != null)
+            try
+            {
+                if (string.IsNullOrWhiteSpace(numPlaca))
                 {
-                    retorno.Sucesso = true;
-                    retorno.Mensagem = "Seguro do veículo encontrado.";
-                    EncontrarVeiculo veiculo = new EncontrarVeiculo(s);
-                    retorno.Resultado = veiculo;
+                    retorno.Sucesso = false;
+                    retorno.Mensagem = "Não encontrado seguro para este veículo.";
                 }
                 else
                 {
-                    retorno.Sucesso = false;
-                    retorno.Mensagem = "Seguro do veículo não encontrado.";
+                    Seguro s = Utilitarios.RetornaDadosLogin().listaSeguros.Where(x => x.objetoSegurado == numPlaca && x.indTipo == 1).SingleOrDefault();
+
+                    if (s != null)
+                    {
+                        retorno.Sucesso = true;
+                        retorno.Mensagem = "Seguro do veículo encontrado.";
+                        EncontrarVeiculo veiculo = new EncontrarVeiculo(s);
+                        retorno.Resultado = veiculo;
+                    }
+                    else
+                    {
+                        retorno.Sucesso = false;
+                        retorno.Mensagem = "Seguro do veículo não encontrado.";
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                retorno.Sucesso = false;
 
+            }
             return retorno;
         }
     }

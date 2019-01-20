@@ -26,9 +26,7 @@
                     <li>@Html.ActionLink("Editar", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Encontrar Veículo", "EncontrarVeiculo", "Home")</li>
                     <li>@Html.ActionLink("Excluir", "Excluir", "Home")</li>
-
                     <li>@Html.ActionLink("Sair", "Sair", "Login")</li>
-                    <li id="sair"><a href="#">Sair</a></li>
                 </ul>
             </div>
         </div>
@@ -37,7 +35,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Meu Aplicativo ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year - Gerenciamento seguros</p>
         </footer>
     </div>
 
@@ -45,10 +43,5 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
-    <script>
-        $('#sair').click(function () {
-            $post()
-        });
-    </script>
 </body>
 </html>

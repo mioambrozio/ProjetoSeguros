@@ -12,7 +12,7 @@ namespace ProjetoSeguros.Business
             try
             {
                 Login login = new Login() { senha = senha, usuario = usuario };
-                HttpContext.Current.Session["sessionLogin"] = login;
+                HttpContext.Current.Session["sessionLogin"] = new DadosLogado(login);
 
                 retorno.Sucesso = true;
             }

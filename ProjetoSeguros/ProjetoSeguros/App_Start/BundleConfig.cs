@@ -5,7 +5,6 @@ namespace ProjetoSeguros
 {
     public class BundleConfig
     {
-        // Para obter mais informações sobre o agrupamento, visite https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery")
@@ -15,8 +14,6 @@ namespace ProjetoSeguros
                 .Include("~/Scripts/knockout.mapping-latest.debug.js")
                 .Include("~/Scripts/knockout.mapping-latest.js")
                 .Include("~/Scripts/knockout.validation.js")
-                .Include("~/Scripts/ko-components.js")
-                .Include("~/Scripts/ko-components.js")
                 .Include("~/Scripts/knockout-jqAutocomplete.js")
                 .Include("~/Scripts/knockout-jqAutocomplete.min.js")
                 .Include("~/Scripts/autoNumeric.js")

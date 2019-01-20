@@ -209,8 +209,6 @@
     <Content Include="Scripts\knockout.validation.js" />
     <Content Include="Scripts\knockout.validation.min.js" />
     <Content Include="Scripts\knockoutsortable.js" />
-    <Content Include="Scripts\ko-components.js" />
-    <Content Include="Scripts\ko-convenience.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Pesquisar.js" />
