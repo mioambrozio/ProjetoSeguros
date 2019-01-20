@@ -35,8 +35,13 @@ var SegurosModel = function (data) {
     });
     self.numSeguro = ko.observable();
     self.dscTipo = ko.observable("");
+    self.dscMaskObjSeg = ko.observable("");
+    self.cpf = ko.observable(false);
     self.indTipo.subscribe(function (valor) {
+        self.objetoSegurado(undefined);
         self.dscTipo(valor == 1 ? 'Placa' : valor == 2 ? 'Endereço' : valor == 3 ? 'CPF' : '');
+        self.dscMaskObjSeg(valor == 3 ? '999.999.999-99' : '');
+        self.cpf(valor == 3 ? true : false);
     });
     self.dscMask = ko.observable("");
     self.indTipoCliente = ko.observable();
@@ -55,9 +60,7 @@ var SegurosModel = function (data) {
                 idSeguro: self.id()
             }, function (data) {
                 if (data.Sucesso) {
-                    self.indTipo(undefined);
-                    self.numCliente(undefined);
-                    self.objetoSegurado(undefined);
+                    self.limpar();
                 }
                 alert(data.Mensagem);
             });
@@ -71,20 +74,23 @@ var SegurosModel = function (data) {
         }, function (data) {
             if (data.Sucesso) {
                 self.indTipo(data.Resultado.indTipo == 1 ? '1' : data.Resultado.indTipo == 2 ? '2' : '3');
-                self.numCliente(data.Resultado.numCliente);
                 self.objetoSegurado(data.Resultado.objetoSegurado);
                 self.id(data.Resultado.id);
+                self.indTipoCliente(data.Resultado.numCliente.length == 14 ? '1' : '2');
+                self.numCliente(data.Resultado.numCliente);
             } else {
-                self.indTipo(undefined);
-                self.numCliente(undefined);
-                self.objetoSegurado(undefined);
-                self.id(undefined);
+                self.limpar();
                 alert(data.Mensagem);
             }
         });
     };
 
     self.errors = ko.validation.group(self);
-
+    self.limpar = function () {
+        self.indTipo(undefined);
+        self.numCliente(undefined);
+        self.objetoSegurado(undefined);
+        self.id(undefined);
+    }
     return self;
 };

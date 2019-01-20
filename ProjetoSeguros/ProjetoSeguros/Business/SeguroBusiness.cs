@@ -9,7 +9,7 @@ namespace ProjetoSeguros.Business
     {
         public Retorno Salvar(string numCliente, int indTipo, string objetoSegurado, int? idSeguro = null)
         {
-            Retorno retorno = new Retorno();
+            Retorno retorno = new Retorno(true);
             try
             {
                 string message = "";

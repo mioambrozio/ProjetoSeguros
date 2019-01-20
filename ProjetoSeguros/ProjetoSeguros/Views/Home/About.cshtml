@@ -47,16 +47,21 @@
                 <label class="form-check-label" for="vida">Vida</label>
             </div>
         </div>
-        <div class="row">
+        <div class="row" data-bind="visible:dscTipo()!='' && dscTipo()!= undefined">
             <div class="col-lg-12">
                 <div class="input-group col-lg-12">
                     <label data-bind="text:dscTipo"></label>
+                    <input class="form-control" type="text" data-bind="masked: objetoSegurado, mask:dscMaskObjSeg,
+                           visible:indTipo() == 3, attr: {placeholder: dscTipo,
+                           maxLength:indTipo()==1 ? 8 : indTipo()==2 ? 150 : indTipo()==3 ? 14:0}">
+
                     <input class="form-control" type="text" data-bind="value: objetoSegurado,
-                           visible:dscTipo()!='' && dscTipo()!= undefined, attr: {placeholder: dscTipo,
-                           maxLength:indTipo()==1 ? 7 : indTipo()==2 ? 150 : indTipo()==3 ? 11:0}">
+                           visible:indTipo() != 3, attr: {placeholder: dscTipo,
+                           maxLength:indTipo()==1 ? 8 : indTipo()==2 ? 150 : indTipo()==3 ? 14:0}">
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <button class="btn btn-info" data-bind="click: salvar">Salvar</button>
