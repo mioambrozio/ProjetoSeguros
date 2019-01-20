@@ -512,53 +512,37 @@ confirmCancelMessage = function (message, title, onOK, onCancel, onSair, message
     }
 };
 
-// ***************** Pausado *****************
-errorMessageSystem = function (title, onOK, Rota, Exeption) {
-    var guidOK = guidGenerator();;
-    var guidLigthbox = guidGenerator();
-    var sb = new stringBuilder();
-    sb.append("<div style=\"display:block\" id=\"" + guidLigthbox + "\" class=\"lightbox -alert\">");
-    sb.append("     <div class=\"light-bg\"></div>");
-    sb.append("     <div class=\"light-content-box\">");
-    sb.append("         <div class=\"title-modal\"><h3 class=\"title3\">" + title + "</h3></div>");
-    sb.append("         <div class=\"light-content\">");
-    sb.append("         <div class=\"icon-alert -alert\"></div>");
-    sb.append("           <p style=\"height: 100%;\" class=\"light-text\">Não foi possivel concluir sua solicitação devido a um erro no servidor. O sistema já enviou um email para o administrador.</p>");
-    sb.append("           <p style=\"width:272px;height: 100%;margin-top:5px;\" class=\"light-text\">Rota : " + Rota + "</p>");
-    sb.append("           <p style=\"width:272px;height: 100%;margin-top:5px;\" class=\"light-text\">Descrição do Erro : " + Exeption + "</p>");
-    sb.append("           <div class=\"btn-box\"><a id=\"" + guidOK + "\" href=\"#\" class=\"btn\">OK</a></div>");
-    sb.append("        </div>");
-    sb.append("    </div>");
-    sb.append("</div>");
-    $(".content").append(sb.toString());
-    $("#" + guidOK + "").focus();
-    $("#" + guidOK + "").off("click").on("click", function () {
-        if (onOK != null) {
-            onOK($(this));
-            $("#" + guidLigthbox + "").remove();
-        } else {
-            $("#" + guidLigthbox + "").remove();
+
+
+
+ko.bindingHandlers.masked = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        var mask = allBindingsAccessor().mask || {};
+
+        if (ko.isObservable(mask)) {
+            $(element).mask(mask());
+            mask.subscribe(function (newValue) {
+                $(element).mask(newValue);
+            });
         }
-        return false;
-    });
+        else {
+            $(element).mask(mask);
+        }
 
-    $(".btn").focus(function () {
-        $(this).css("background-color", "#005c99");
-    }).focusout(function () {
-        $(this).css("background-color", "#6ca314");
-    });
-}
+        ko.utils.registerEventHandler(element, 'focusout', function () {
+            var observable = valueAccessor();
+            observable($(element).val());
+        });
 
-///mostrar e ocultar carregnao
-///passar true para exibir e false para ocultar
-carregando = function (mostrarCarregando) {
-    if (mostrarCarregando === true) {
-        $("#loadingModal").css("display", "show");
-        for (x = 0; x == 1; x = 0)
-            if ($("#loadingModal").css("display") == "show")
-                x == 1;
+        //handle disposal (if KO removes by the template binding)
+        ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+            $(element).mask("destroy");
+        });
+    },
+    update: function (element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        $(element).val(value);
     }
-    else {
-        $("#loadingModal").css("display", "none");
-    }
-}
+};
+
+ko.validation.makeBindingHandlerValidatable('masked');

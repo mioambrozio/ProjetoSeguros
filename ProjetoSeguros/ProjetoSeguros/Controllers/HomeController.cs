@@ -5,37 +5,32 @@ using System.Web.Mvc;
 
 namespace ProjetoSeguros.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         Business.SeguroBusiness bl = new Business.SeguroBusiness();
         public ActionResult Index()
         {
-            DadosLogado login = Utilitarios.RetornaDadosLogin();
-            if (login == null)
-                return RedirectToAction("Login", "Login");
-
-            return View();
+            return VerificaLogado(null, null);
         }
-        
+
         public ActionResult About()
         {
-            return View(new Seguro(true));
+            return VerificaLogado("About", new Seguro(true));
         }
 
         public ActionResult Contact()
         {
-            return View(new Seguro(false));
+            return VerificaLogado("Contact", new Seguro(false));
         }
 
         public ActionResult Pesquisar()
         {
-            Retorno r = bl.Pesquisar();
-            return View(new BuscarSeguro() { lista = (List<Seguro>)r.Resultado });
+            return VerificaLogado("Pesquisar", new BuscarSeguro() { lista = (List<Seguro>)bl.Pesquisar().Resultado });
         }
 
         public ActionResult EncontrarVeiculo()
         {
-            return View(new EncontrarVeiculo());
+            return VerificaLogado("EncontrarVeiculo", new EncontrarVeiculo());
         }
 
         public JsonResult Filtrar(int indOpcao, string numPlaca)
@@ -68,7 +63,7 @@ namespace ProjetoSeguros.Controllers
 
         public ActionResult Excluir()
         {
-            return View();
+            return VerificaLogado("Excluir", null);
         }
 
     }

@@ -17,9 +17,19 @@ namespace ProjetoSeguros.Business
                 if (indTipo == 0) { message += "O campo Tipo é obrigatorio.<br>"; }
                 if (string.IsNullOrWhiteSpace(objetoSegurado)) { message += "O campo Objeto Segurado é obrigatório."; }
 
-                if (idSeguro.HasValue)
+                if (idSeguro.HasValue && idSeguro > 0)
                 {
-                    //alterar
+                    foreach(Seguro s in Utilitarios.RetornaDadosLogin().listaSeguros)
+                    {
+                        if (s.id == idSeguro)
+                        {
+                            s.indTipo = indTipo;
+                            s.objetoSegurado = objetoSegurado;
+                            s.numCliente = numCliente;
+                            s.dscTipo = indTipo == 1 ? "Automóvel" : indTipo == 2 ? "Residencial" : indTipo == 3 ? "Vida" : "";
+                        }
+                    }
+
                     retorno.Mensagem = "Alterado com sucesso!";
                 }
                 else

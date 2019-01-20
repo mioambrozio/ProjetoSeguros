@@ -150,6 +150,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Business\LoginBusiness.cs" />
     <Compile Include="Business\SeguroBusiness.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -183,6 +184,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Scripts\plugins\jquery.maskedinput.js" />
+    <Content Include="Scripts\plugins\jquery.maskedinput.min.js" />
     <Content Include="Scripts\plugins\autoNumeric.js" />
     <Content Include="Scripts\plugins\bootstrap.js" />
     <Content Include="Scripts\plugins\bootstrap.min.js" />

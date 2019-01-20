@@ -19,6 +19,7 @@ namespace ProjetoSeguros
                 .Include("~/Scripts/plugins/autoNumeric.js")
                 .Include("~/Scripts/plugins/knockout-file-bindings.js")
                 .Include("~/Scripts/plugins/knockoutsortable.js")
+                .Include("~/Scripts/plugins/jquery.maskedinput.js")
                 .Include("~/Scripts/Framework_Base.js")
                 );
 
